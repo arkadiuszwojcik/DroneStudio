@@ -1,0 +1,36 @@
+﻿<Fluent:RibbonTabItem x:Class="DroneStudio.Modules.Connection.ConnectionRibbonTabItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
+             xmlns:converter="clr-namespace:DroneStudio.Modules.Connection.Bluetooth"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Fluent:RibbonTabItem.Resources>
+        <ResourceDictionary>
+            <converter:BluetoothAddressConverter x:Key="bluetoothAddressConverter"/>
+        </ResourceDictionary>
+    </Fluent:RibbonTabItem.Resources>
+    <Fluent:RibbonGroupBox Header="Connect / Disconnect">
+        <Fluent:Button Header="Connect" Command="{Binding ConnectCommand}" LargeIcon="Icons\add.png"/>
+        <Fluent:Button Header="Disconnect" Command="{Binding DisconnectCommand}" LargeIcon="Icons\remove.png"/>
+    </Fluent:RibbonGroupBox>
+    <Fluent:RibbonGroupBox Header="Serial port">
+        <Fluent:ComboBox ItemsSource="{Binding SerialPorts}" SelectedItem="{Binding SelectedSerialPort}" Width="100" IsEditable="False" Margin="0,5,10,0"/>
+        <Fluent:ComboBox ItemsSource="{Binding BoundRates}" SelectedItem="{Binding SelectedBoundRate}" Width="100" IsEditable="False" Margin="0,5,10,0"/>
+    </Fluent:RibbonGroupBox>
+    <Fluent:RibbonGroupBox Header="Bluetooth" DataContext="{Binding BluetoothViewModel}">
+        <Fluent:Button Header="Discover" Command="{Binding DiscoverCommand}" LargeIcon="Icons\search.png"/>
+        <Fluent:ComboBox ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedBluetoothDevice}" Width="100" IsEditable="False" Margin="0,5,10,0">
+            <Fluent:ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding DeviceName}"/>
+                        <TextBlock Text="{Binding DeviceAddress, Converter={StaticResource bluetoothAddressConverter}}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Fluent:ComboBox.ItemTemplate>
+        </Fluent:ComboBox>
+    </Fluent:RibbonGroupBox>
+</Fluent:RibbonTabItem>
