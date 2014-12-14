@@ -1,32 +1,22 @@
-﻿<Fluent:RibbonWindow x:Class="DroneStudio.MainWindow"
+﻿<fluent:RibbonWindow x:Class="DroneStudio.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
-        xmlns:Connection="clr-namespace:DroneStudio.Modules.Connection"
-        xmlns:Tools="clr-namespace:DroneStudio.Modules.Tools"
-        xmlns:Terminal="clr-namespace:DroneStudio.Controls;assembly=DroneStudio.Controls"
+        xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
+        xmlns:connection="clr-namespace:DroneStudio.Modules"
+        xmlns:tools="clr-namespace:DroneStudio.Modules"
+        xmlns:terminal="clr-namespace:DroneStudio.Controls;assembly=DroneStudio.Controls"
+        xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="Drone Studio" Height="350" Width="525"
         DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}">
     <DockPanel LastChildFill="True">
-        <Fluent:Ribbon x:Name="ribbon" DockPanel.Dock="Top">
-            <Tools:ToolsRibbonTabItemView Header="Tools"/>
-            <Connection:ConnectionRibbonTabItemView Header="Connection" DataContext="{Binding ConnectionsViewModel}"/>
-        </Fluent:Ribbon>
-        <Terminal:Terminal
-            x:Name="TerminalOutput"
-            DataContext="{Binding TerminalViewModel}"
-            IsReadOnlyCaretVisible="False"
-            VerticalScrollBarVisibility="Visible"
-            IsReadOnly="false"
-            ItemsSource="{Binding Lines}"
-            Prompt=">">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="LineEntered">
-                    <i:InvokeCommandAction Command="{Binding Path=EnterLineCommand, Mode=OneWay}"
-                                           CommandParameter="{Binding Path=Line, Mode=OneWay, ElementName=TerminalOutput}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Terminal:Terminal>
+        <fluent:Ribbon x:Name="ribbon" DockPanel.Dock="Top">
+            <tools:ToolsRibbonTabItemView Header="Tools"/>
+            <connection:ConnectionRibbonTabItemView Header="Connection" DataContext="{Binding ConnectionsViewModel}"/>
+        </fluent:Ribbon>
+        <avalonDock:DockingManager x:Name="avalonDockingManager">
+            <avalonDock:LayoutRoot>
+              </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
     </DockPanel>
-</Fluent:RibbonWindow>
+</fluent:RibbonWindow>

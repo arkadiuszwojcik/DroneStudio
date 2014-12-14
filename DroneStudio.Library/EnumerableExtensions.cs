@@ -15,5 +15,16 @@ namespace DroneStudio.Library
                 action(item);
             }
         }
+
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> sequence)
+        {
+            return sequence.Where(e => e != null);
+        }
+
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> sequence)
+            where T : struct
+        {
+            return sequence.Where(e => e != null).Select(e => e.Value);
+        }
     }
 }

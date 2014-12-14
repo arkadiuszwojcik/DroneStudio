@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Reactive.Linq;
 using System.Reactive.Concurrency;
 
-namespace DroneStudio.Modules.Tools.Terminal
+namespace DroneStudio.Modules.Terminal
 {
     public class TerminalViewModel : ViewModelBase
     {

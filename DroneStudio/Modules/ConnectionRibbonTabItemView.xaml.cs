@@ -1,4 +1,4 @@
-﻿namespace DroneStudio.Modules.Connection
+﻿namespace DroneStudio.Modules
 {
     public partial class ConnectionRibbonTabItemView
     {

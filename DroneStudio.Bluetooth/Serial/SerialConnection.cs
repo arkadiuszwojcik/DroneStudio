@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Reactive.Linq;
@@ -45,7 +46,14 @@ namespace DroneStudio.Connections.Serial
 
         public void SendData(byte[] data)
         {
-            this.serialPort.Write(data, 0, data.Length);
+            try
+            {
+                this.serialPort.Write(data, 0, data.Length);
+            }
+            catch (IOException)
+            {
+                // TODO Log exception
+            }
         }
 
         public IObservable<byte[]> DataReceived

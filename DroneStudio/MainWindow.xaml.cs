@@ -10,7 +10,13 @@ namespace DroneStudio
         public MainWindow()
         {
             this.InitializeComponent();
+            this.SetAvalonDockingManager();
             this.FixDisappearingDataContextAfterMinimize();
+        }
+
+        private void SetAvalonDockingManager()
+        {
+            AvalonDockingManager.Instance.AddDockingManager(avalonDockingManager);
         }
 
         private void FixDisappearingDataContextAfterMinimize()

@@ -58,6 +58,15 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Core.2014.1.546\lib\portable-net4+sl4+wp71+win8\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.Wpf.2014.1.546\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.Wpf.2014.1.546\lib\net45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -90,6 +99,31 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Expression">
+      <HintPath>..\packages\AvalonDock.2.0.2000\lib\net40\Xceed.Wpf.AvalonDock.Themes.Expression.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -97,17 +131,71 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationLogic\CommandLink.cs" />
+    <Compile Include="ApplicationLogic\IMessageLink.cs" />
+    <Compile Include="ApplicationLogic\MessageLink.cs" />
+    <Compile Include="ApplicationLogic\Messages\IMessageParser.cs" />
     <Compile Include="ApplicationLogic\ICommandLink.cs" />
     <Compile Include="ApplicationLogic\Installer.cs" />
+    <Compile Include="ApplicationLogic\Messages\IMessage.cs" />
+    <Compile Include="ApplicationLogic\Messages\PidMeasureMessage.cs" />
+    <Compile Include="ApplicationLogic\Messages\PidMeasureMessageParser.cs" />
+    <Compile Include="MainView\Commands\ControlPanelCommand.cs" />
+    <Compile Include="MainView\Commands\PidTuningCommand.cs" />
+    <Compile Include="MainView\Commands\SettingsCommand.cs" />
+    <Compile Include="MainView\Commands\TerminalCommand.cs" />
+    <Compile Include="MainView\Installer.cs" />
+    <Compile Include="Modules\ControlPanel\Commands\ArmCommand.cs" />
+    <Compile Include="Modules\ControlPanel\Commands\DisarmCommand.cs" />
+    <Compile Include="Modules\ControlPanel\Commands\ThrottleCommand.cs" />
+    <Compile Include="Modules\ControlPanel\ControlPanelView.xaml.cs">
+      <DependentUpon>ControlPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ControlPanel\ControlPanelViewModel.cs" />
+    <Compile Include="Modules\ControlPanel\IControlPanelViewFactory.cs" />
+    <Compile Include="Modules\ControlPanel\IControlPanelViewModelFactory.cs" />
+    <Compile Include="Modules\ControlPanel\Installer.cs" />
+    <Compile Include="Modules\PidTuner\Installer.cs" />
+    <Compile Include="Modules\PidTuner\PidTunerView.xaml.cs">
+      <DependentUpon>PidTunerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PidTuner\IPidTunerViewFactory.cs" />
+    <Compile Include="Modules\PidTuner\PidTunerViewModel.cs" />
+    <Compile Include="Modules\PidTuner\IPidTunerViewModelFactory.cs" />
+    <Compile Include="Modules\Settings\Controls\Accelerometer.xaml.cs">
+      <DependentUpon>Accelerometer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Controls\Gyroscope.xaml.cs">
+      <DependentUpon>Gyroscope.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Controls\Magnetometer.xaml.cs">
+      <DependentUpon>Magnetometer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Controls\Pid.xaml.cs">
+      <DependentUpon>Pid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Installer.cs" />
+    <Compile Include="Modules\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\ISettingsViewFactory.cs" />
+    <Compile Include="Modules\Settings\SettingsViewModel.cs" />
+    <Compile Include="Modules\Settings\ISettingsViewModelFactory.cs" />
+    <Compile Include="Modules\Terminal\Installer.cs" />
+    <Compile Include="Modules\Terminal\ITerminalViewFactory.cs" />
+    <Compile Include="Modules\Terminal\ITerminalViewModelFactory.cs" />
+    <Compile Include="Modules\Terminal\TerminalView.xaml.cs">
+      <DependentUpon>TerminalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUtils\AvalonDockingManager.cs" />
     <Compile Include="Installer.cs" />
     <Compile Include="Modules\Connection\Bluetooth\BluetoothAddressConverter.cs" />
     <Compile Include="Modules\Connection\Bluetooth\BluetoothViewModel.cs" />
-    <Compile Include="Modules\Connection\ConnectionRibbonTabItemView.xaml.cs">
+    <Compile Include="Modules\ConnectionRibbonTabItemView.xaml.cs">
       <DependentUpon>ConnectionRibbonTabItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Connection\Installer.cs" />
-    <Compile Include="Modules\Tools\Terminal\TerminalViewModel.cs" />
-    <Compile Include="Modules\Tools\ToolsRibbonTabItemView.xaml.cs">
+    <Compile Include="Modules\Terminal\TerminalViewModel.cs" />
+    <Compile Include="Modules\ToolsRibbonTabItemView.xaml.cs">
       <DependentUpon>ToolsRibbonTabItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewUtils\IDispatcherProvider.cs" />
@@ -116,7 +204,7 @@
     <Compile Include="ViewUtils\UiDispatcherProvider.cs" />
     <Compile Include="ViewUtils\WindowDisplayer.cs" />
     <Compile Include="ViewUtils\ICloseableViewModel.cs" />
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="MainView\MainViewModel.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -130,7 +218,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Modules\Connection\ConnectionRibbonTabItemView.xaml">
+    <Page Include="Modules\ConnectionRibbonTabItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,7 +226,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Tools\ToolsRibbonTabItemView.xaml">
+    <Page Include="Modules\ControlPanel\ControlPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\PidTuner\PidTunerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Settings\Controls\Accelerometer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Settings\Controls\Gyroscope.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Settings\Controls\Magnetometer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Settings\Controls\Pid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Settings\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Terminal\TerminalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ToolsRibbonTabItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,12 +317,17 @@
   <ItemGroup>
     <Resource Include="Icons\search.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icons\control.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\pid.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\eprom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

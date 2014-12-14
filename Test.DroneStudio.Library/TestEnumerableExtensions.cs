@@ -1,28 +1,30 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using DroneStudio.Library;
+using System;
 
 namespace Test.DroneStudio.Library
 {
     [TestFixture]
     public class TestEnumerableExtensions
     {
-        [SetUp]
-        public void Initialise()
-        {
-            this.listOfInts = new List<int>() { 1, 2, 3 };
-        }
-
         [Test]
         public void ForEach_performs_action_on_each_element_of_list()
         {
-            var newList = new List<int>();
+            var list = new List<int>();
+            var listOfInts = new List<int>() { 1, 2, 3 };
 
-            this.listOfInts.ForEach(p => newList.Add(p));
+            listOfInts.ForEach(p => list.Add(p));
 
-            CollectionAssert.AreEqual(this.listOfInts, newList);
+            CollectionAssert.AreEqual(listOfInts, list);
         }
 
-        private IList<int> listOfInts;
+        [Test]
+        public void WhereNotNull_returns_not_null_elements()
+        {
+            var list = new List<string>() { "a", null, "b", null, "c" };
+
+            CollectionAssert.AreEqual(new List<string>() { "a", "b", "c" }, list.WhereNotNull());
+        }
     }
 }

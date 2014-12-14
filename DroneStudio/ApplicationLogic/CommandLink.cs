@@ -16,6 +16,14 @@ namespace DroneStudio.ApplicationLogic
             this.incomingCommands = new Subject<string>();
 
             this.dataLink.DataReceived.Subscribe(this.OnNewData);
+
+            var thread = new System.Threading.Thread(() => {
+                System.Threading.Thread.Sleep(10000);
+                this.incomingCommands.OnNext("PIDM 20");
+                this.incomingCommands.OnNext("PIDM 20");
+                this.incomingCommands.OnNext("PIDM 20");
+            });
+            thread.Start();
         }
 
         public void SendCommand(string command)

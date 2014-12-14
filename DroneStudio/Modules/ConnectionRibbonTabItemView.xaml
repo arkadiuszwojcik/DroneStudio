@@ -1,4 +1,4 @@
-﻿<Fluent:RibbonTabItem x:Class="DroneStudio.Modules.Connection.ConnectionRibbonTabItemView"
+﻿<Fluent:RibbonTabItem x:Class="DroneStudio.Modules.ConnectionRibbonTabItemView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

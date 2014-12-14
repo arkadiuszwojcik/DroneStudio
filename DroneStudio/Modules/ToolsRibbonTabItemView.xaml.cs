@@ -1,4 +1,4 @@
-﻿namespace DroneStudio.Modules.Tools
+﻿namespace DroneStudio.Modules
 {
     public partial class ToolsRibbonTabItemView
     {

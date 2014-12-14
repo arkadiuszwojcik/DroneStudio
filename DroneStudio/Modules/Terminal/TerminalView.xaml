@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="DroneStudio.Modules.Terminal.TerminalView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:terminal="clr-namespace:DroneStudio.Controls;assembly=DroneStudio.Controls"
+             xmlns:terminalModule="clr-namespace:DroneStudio.Modules.Terminal"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=terminalModule:TerminalViewModel}">
+    <terminal:Terminal
+            x:Name="TerminalOutput"
+            IsReadOnlyCaretVisible="False"
+            VerticalScrollBarVisibility="Visible"
+            IsReadOnly="false"
+            ItemsSource="{Binding Lines}"
+            Prompt=">">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="LineEntered">
+                <i:InvokeCommandAction Command="{Binding Path=EnterLineCommand, Mode=OneWay}"
+                                           CommandParameter="{Binding Path=Line, Mode=OneWay, ElementName=TerminalOutput}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </terminal:Terminal>
+</UserControl>

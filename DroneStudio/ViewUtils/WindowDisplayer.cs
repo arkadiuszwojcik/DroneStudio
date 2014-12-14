@@ -1,10 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Windows;
 using System.Windows.Controls;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace DroneStudio.ViewUtils
 {
-    class WindowDisplayer
+    public class WindowDisplayer
     {
         public void ShowInDialog(string title, UserControl control, ViewModelBase viewModel, int width, int height)
         {
@@ -29,6 +30,19 @@ namespace DroneStudio.ViewUtils
         public void ShowInDialog(string title, UserControl control, ViewModelBase viewModel)
         {
             this.ShowInDialog(title, control, viewModel, 300, 300);
+        }
+
+        public void ShowInFloatingWindow(UserControl control, ViewModelBase viewModel, string title)
+        {
+            control.DataContext = viewModel;
+
+            var layout = new LayoutAnchorable();
+            layout.Title = title;
+            layout.Content = control;
+            layout.AddToLayout(AvalonDockingManager.Instance.DockingManager, AnchorableShowStrategy.Most);
+            layout.FloatingWidth = 300;
+            layout.FloatingHeight = 300;
+            layout.Float();
         }
     }
 }
