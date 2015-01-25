@@ -5,6 +5,7 @@ namespace DroneStudio.ApplicationLogic
 {
     public interface IMessageLink
     {
+        void SendMessage(IMessage message);
         IObservable<IMessage> IncomingMessages { get; }
     }
 }

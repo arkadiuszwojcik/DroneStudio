@@ -1,4 +1,6 @@
-﻿namespace DroneStudio.Modules.Settings
+﻿using DroneStudio.Modules.Settings.ViewModels;
+
+namespace DroneStudio.Modules.Settings
 {
     public interface ISettingsViewModelFactory
     {

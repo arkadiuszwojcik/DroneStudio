@@ -133,12 +133,17 @@
     <Compile Include="ApplicationLogic\CommandLink.cs" />
     <Compile Include="ApplicationLogic\IMessageLink.cs" />
     <Compile Include="ApplicationLogic\MessageLink.cs" />
+    <Compile Include="ApplicationLogic\Messages\FloatValueMessage.cs" />
     <Compile Include="ApplicationLogic\Messages\IMessageParser.cs" />
     <Compile Include="ApplicationLogic\ICommandLink.cs" />
     <Compile Include="ApplicationLogic\Installer.cs" />
     <Compile Include="ApplicationLogic\Messages\IMessage.cs" />
     <Compile Include="ApplicationLogic\Messages\PidMeasureMessage.cs" />
     <Compile Include="ApplicationLogic\Messages\PidMeasureMessageParser.cs" />
+    <Compile Include="ApplicationLogic\Messages\PidType.cs" />
+    <Compile Include="ApplicationLogic\Messages\ReceivedPidMessage.cs" />
+    <Compile Include="ApplicationLogic\Messages\ReceivedPidMessageParser.cs" />
+    <Compile Include="ApplicationLogic\Messages\SavePidMessage.cs" />
     <Compile Include="MainView\Commands\ControlPanelCommand.cs" />
     <Compile Include="MainView\Commands\PidTuningCommand.cs" />
     <Compile Include="MainView\Commands\SettingsCommand.cs" />
@@ -161,25 +166,24 @@
     <Compile Include="Modules\PidTuner\IPidTunerViewFactory.cs" />
     <Compile Include="Modules\PidTuner\PidTunerViewModel.cs" />
     <Compile Include="Modules\PidTuner\IPidTunerViewModelFactory.cs" />
-    <Compile Include="Modules\Settings\Controls\Accelerometer.xaml.cs">
-      <DependentUpon>Accelerometer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Settings\Controls\Gyroscope.xaml.cs">
-      <DependentUpon>Gyroscope.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Settings\Controls\Magnetometer.xaml.cs">
-      <DependentUpon>Magnetometer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Settings\Controls\Pid.xaml.cs">
-      <DependentUpon>Pid.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Modules\Settings\Commands\LoadCommand.cs" />
+    <Compile Include="Modules\Settings\Commands\SaveCommand.cs" />
+    <Compile Include="Modules\Settings\Eeprom\EepromFieldAttribute.cs" />
     <Compile Include="Modules\Settings\Installer.cs" />
-    <Compile Include="Modules\Settings\SettingsView.xaml.cs">
+    <Compile Include="Modules\Settings\Eeprom\MulticopterEeprom.cs" />
+    <Compile Include="Modules\Settings\Eeprom\Eeprom.cs" />
+    <Compile Include="Modules\Settings\ISettingsModel.cs" />
+    <Compile Include="Modules\Settings\SettingsModel.cs" />
+    <Compile Include="Modules\Settings\ISettingsViewFactory.cs" />
+    <Compile Include="Modules\Settings\ISettingsViewModelFactory.cs" />
+    <Compile Include="Modules\Settings\Eeprom\StructSerializer.cs" />
+    <Compile Include="Modules\Settings\ViewModels\FieldViewModel.cs" />
+    <Compile Include="Modules\Settings\ViewModels\FloatViewModel.cs" />
+    <Compile Include="Modules\Settings\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Modules\Settings\ViewModels\ShortViewModel.cs" />
+    <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Settings\ISettingsViewFactory.cs" />
-    <Compile Include="Modules\Settings\SettingsViewModel.cs" />
-    <Compile Include="Modules\Settings\ISettingsViewModelFactory.cs" />
     <Compile Include="Modules\Terminal\Installer.cs" />
     <Compile Include="Modules\Terminal\ITerminalViewFactory.cs" />
     <Compile Include="Modules\Terminal\ITerminalViewModelFactory.cs" />
@@ -234,23 +238,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Settings\Controls\Accelerometer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Settings\Controls\Gyroscope.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Settings\Controls\Magnetometer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Settings\Controls\Pid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Settings\SettingsView.xaml">
+    <Page Include="Modules\Settings\Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,7 +284,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DroneStudio.Bluetooth\DroneStudio.Connections.csproj">
+    <ProjectReference Include="..\DroneStudio.Connections\DroneStudio.Connections.csproj">
       <Project>{db90b24f-962a-44a0-8368-80c62a61007c}</Project>
       <Name>DroneStudio.Connections</Name>
     </ProjectReference>
@@ -328,6 +316,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\Settings\Messages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

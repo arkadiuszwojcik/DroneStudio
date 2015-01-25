@@ -10,6 +10,7 @@ namespace DroneStudio.ApplicationLogic
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IMessageParser>().ImplementedBy<PidMeasureMessageParser>());
+            container.Register(Component.For<IMessageParser>().ImplementedBy<ReceivedPidMessageParser>());
 
             container.Register(Component.For<ICommandLink>().ImplementedBy<CommandLink>());
             container.Register(Component.For<IMessageLink>().ImplementedBy<MessageLink>());

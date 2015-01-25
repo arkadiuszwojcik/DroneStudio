@@ -18,6 +18,11 @@ namespace DroneStudio.ApplicationLogic
             this.commandLink.IncomingCommands.Subscribe(this.OnNewCommand);
         }
 
+        public void SendMessage(IMessage message)
+        {
+            this.commandLink.SendCommand(message.ToString());
+        }
+
         public IObservable<IMessage> IncomingMessages
         {
             get { return this.incomingMessages; }

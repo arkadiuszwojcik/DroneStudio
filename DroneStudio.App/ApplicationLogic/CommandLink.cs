@@ -17,13 +17,21 @@ namespace DroneStudio.ApplicationLogic
 
             this.dataLink.DataReceived.Subscribe(this.OnNewData);
 
+            /* DEBUG
             var thread = new System.Threading.Thread(() => {
                 System.Threading.Thread.Sleep(10000);
                 this.incomingCommands.OnNext("PIDM 20");
                 this.incomingCommands.OnNext("PIDM 20");
                 this.incomingCommands.OnNext("PIDM 20");
+                this.incomingCommands.OnNext("PID A 1 2 3 4");
+                this.incomingCommands.OnNext("PID B 5 6 7 8");
+                this.incomingCommands.OnNext("PID C 9 10 11 12");
+                this.incomingCommands.OnNext("PID D 13 14 15 16");
+                this.incomingCommands.OnNext("PID E 17 18 19 20");
+                this.incomingCommands.OnNext("PID F 21 22 23 24");
             });
             thread.Start();
+            */
         }
 
         public void SendCommand(string command)
@@ -42,7 +50,7 @@ namespace DroneStudio.ApplicationLogic
             {
                 byte b = newData[i];
                 if (b == Delimiter)
-                {
+                 {
                     string command = Encoding.ASCII.GetString(buffer, 0, this.bufferPosition);
                     this.bufferPosition = 0;
                     this.incomingCommands.OnNext(command);
