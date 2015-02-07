@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Reactive.Linq;
+using DroneStudio.Library;
 using DroneStudio.ApplicationLogic;
 using DroneStudio.ApplicationLogic.Messages;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reactive.Subjects;
-using DroneStudio.Library;
+using DroneStudio.Library.Extensions;
 using DroneStudio.ApplicationLogic.Messages;
 using System.Collections.Generic;
 

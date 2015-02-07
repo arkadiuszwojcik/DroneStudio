@@ -5,17 +5,17 @@ namespace DroneStudio.Modules.Settings.ViewModels
 {
     public class FloatViewModel : ViewModelBase
     {
-        public FloatViewModel(EepromFieldAttribute fieldAttribute, ISettingsModel settingsModel)
+        public FloatViewModel(EepromField eepromField, ISettingsModel settingsModel)
         {
             this.settingsModel = settingsModel;
-            this.fieldAttribute = fieldAttribute;
-            settingsModel.Modyfied += OnModyfied;
+            this.eepromField = eepromField;
+            settingsModel.EepromModyfied += OnModyfied;
         }
 
         public float Value 
         {
-            get { return this.settingsModel.GetFloat(fieldAttribute); }
-            set { this.settingsModel.SetFloat(fieldAttribute, value); }
+            get { return this.settingsModel.GetFloat(eepromField); }
+            set { this.settingsModel.SetFloat(eepromField, value); }
         }
 
         private void OnModyfied(object sender, System.EventArgs e)
@@ -24,6 +24,6 @@ namespace DroneStudio.Modules.Settings.ViewModels
         }
 
         private readonly ISettingsModel settingsModel;
-        private readonly EepromFieldAttribute fieldAttribute;
+        private readonly EepromField eepromField;
     }
 }

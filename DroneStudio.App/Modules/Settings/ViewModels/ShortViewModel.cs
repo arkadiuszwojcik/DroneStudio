@@ -5,17 +5,17 @@ namespace DroneStudio.Modules.Settings.ViewModels
 {
     public class ShortViewModel : ViewModelBase
     {
-        public ShortViewModel(EepromFieldAttribute fieldAttribute, ISettingsModel settingsModel)
+        public ShortViewModel(EepromField eepromField, ISettingsModel settingsModel)
         {
             this.settingsModel = settingsModel;
-            this.fieldAttribute = fieldAttribute;
-            settingsModel.Modyfied += OnModyfied;
+            this.eepromField = eepromField;
+            settingsModel.EepromModyfied += OnModyfied;
         }
 
         public short Value 
         {
-            get { return this.settingsModel.GetShort(fieldAttribute); }
-            set { this.settingsModel.SetShort(fieldAttribute, value); }
+            get { return this.settingsModel.GetShort(eepromField); }
+            set { this.settingsModel.SetShort(eepromField, value); }
         }
 
         private void OnModyfied(object sender, System.EventArgs e)
@@ -24,6 +24,6 @@ namespace DroneStudio.Modules.Settings.ViewModels
         }
 
         private readonly ISettingsModel settingsModel;
-        private readonly EepromFieldAttribute fieldAttribute;
+        private readonly EepromField eepromField;
     }
 }

@@ -1,10 +1,10 @@
-﻿using DroneStudio.Connections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
+using DroneStudio.Connectivity;
 
 namespace DroneStudio.ApplicationLogic
 {
@@ -17,12 +17,14 @@ namespace DroneStudio.ApplicationLogic
 
             this.dataLink.DataReceived.Subscribe(this.OnNewData);
 
-            /* DEBUG
+            /*
             var thread = new System.Threading.Thread(() => {
                 System.Threading.Thread.Sleep(10000);
                 this.incomingCommands.OnNext("PIDM 20");
                 this.incomingCommands.OnNext("PIDM 20");
                 this.incomingCommands.OnNext("PIDM 20");
+                this.incomingCommands.OnNext("FV 0 33");
+                this.incomingCommands.OnNext("FV 8 44");
                 this.incomingCommands.OnNext("PID A 1 2 3 4");
                 this.incomingCommands.OnNext("PID B 5 6 7 8");
                 this.incomingCommands.OnNext("PID C 9 10 11 12");
@@ -32,6 +34,7 @@ namespace DroneStudio.ApplicationLogic
             });
             thread.Start();
             */
+           
         }
 
         public void SendCommand(string command)

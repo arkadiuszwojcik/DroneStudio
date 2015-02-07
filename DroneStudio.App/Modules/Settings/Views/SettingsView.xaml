@@ -8,11 +8,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ListView ItemsSource="{Binding Fields}">
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="24"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Content="Load" Command="{Binding LoadCommand}" MinWidth="80" Margin="5 2"/>
+            <Button Content="Send" Command="{Binding SendCommand}" MinWidth="80" Margin="5 2"/>
+            <Button Content="Save" Command="{Binding SaveCommand}" MinWidth="80" Margin="5 2"/>
+        </StackPanel>
+        <ListView Grid.Row="1" ItemsSource="{Binding Fields}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FieldAttribute.FieldName}" MinWidth="200"/>
+                        <TextBlock Text="{Binding EepromField.FieldName}" MinWidth="200"/>
                         <ContentPresenter Content="{Binding ValueViewModel}">
                             <ContentPresenter.Resources>
                                 <DataTemplate DataType="{x:Type viewmodels:FloatViewModel}">

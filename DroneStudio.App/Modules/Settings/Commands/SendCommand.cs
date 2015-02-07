@@ -2,19 +2,18 @@
 using System.Windows.Input;
 using DroneStudio.ApplicationLogic;
 using DroneStudio.Modules.Settings.Converters;
-using DroneStudio.Modules.Settings.Eeprom;
 
 namespace DroneStudio.Modules.Settings.Commands
 {
-    public class LoadCommand : ICommand
+    public class SendCommand : ICommand
     {
-        public LoadCommand(
+        public SendCommand(
             ISettingsModel settingsModel,
             ICommandLink commandLink,
-            EepromFieldToLoadCommandConverter fieldToCommandConverter)
+            EepromFieldToSendCommandConverter fieldToCommandConverter)
         {
-            this.commandLink = commandLink;
             this.settingsModel = settingsModel;
+            this.commandLink = commandLink;
             this.fieldToCommandConverter = fieldToCommandConverter;
         }
 
@@ -29,13 +28,16 @@ namespace DroneStudio.Modules.Settings.Commands
         {
             foreach (var field in this.settingsModel.EepromFields)
             {
-                string command = this.fieldToCommandConverter.ToCommand(field);
+                if (!field.Modyfied) continue;
+
+                string command = this.fieldToCommandConverter.ToCommand(this.settingsModel, field);
                 this.commandLink.SendCommand(command);
+                field.Modyfied = false;
             }
         }
 
-        private readonly ICommandLink commandLink;
         private readonly ISettingsModel settingsModel;
-        private readonly EepromFieldToLoadCommandConverter fieldToCommandConverter;
+        private readonly ICommandLink commandLink;
+        private readonly EepromFieldToSendCommandConverter fieldToCommandConverter;
     }
 }

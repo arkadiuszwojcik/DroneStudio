@@ -1,7 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DroneStudio.Modules.Connection.Bluetooth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,6 @@ namespace DroneStudio.Modules.Connection
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<ConnectionViewModel>());
-            container.Register(Component.For<BluetoothViewModel>());
         }
     }
 }

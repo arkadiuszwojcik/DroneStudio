@@ -1,15 +1,13 @@
-﻿using DroneStudio.Connections.Serial;
+﻿using DroneStudio.Connectivity.Serial;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 using System.Linq;
 using System.Collections.Generic;
-using DroneStudio.Connections;
+using DroneStudio.Connectivity;
 using DroneStudio.ViewUtils;
 using System;
-using DroneStudio.Library;
-using DroneStudio.Connections.Bluetooth;
-using DroneStudio.Modules.Connection.Bluetooth;
+using DroneStudio.Library.Multithreading;
 using System.Threading.Tasks;
 
 namespace DroneStudio.Modules.Connection
@@ -22,18 +20,14 @@ namespace DroneStudio.Modules.Connection
             SerialConnectionFactory serialPortConnectionFactory,
             SerialBoundRatesProvider serialPortBoundRatesProvider,
             MessageBoxDisplayer messageBoxDisplayer,
-            BluetoothViewModel bluetoothViewModel,
-            BluetoothConnectionFactory bluetoothConnectionFactory,
             UiDispatcherProvider uiDispatcherProvider)
         {
             this.SerialPorts = serialPortsProvider.GetPortNames();
             this.BoundRates = serialPortBoundRatesProvider.GetBoundRates();
 
-            this.BluetoothViewModel = bluetoothViewModel;
             this.connectionManager = connectionManager;
             this.serialPortConnectionFactory = serialPortConnectionFactory;
             this.messageBoxDisplayer = messageBoxDisplayer;
-            this.bluetoothConnectionFactory = bluetoothConnectionFactory;
             this.uiDispatcherProvider = uiDispatcherProvider;
 
             this.ConnectCommand = new RelayCommand(this.Connect, this.CanConnect);
@@ -42,8 +36,6 @@ namespace DroneStudio.Modules.Connection
             this.SelectedSerialPort = this.SerialPorts.FirstOrDefault();
             this.SelectedBoundRate = this.BoundRates.First();
         }
-
-        public BluetoothViewModel BluetoothViewModel { get; private set; }
 
         public string[] SerialPorts { get; private set; }
 
@@ -150,7 +142,6 @@ namespace DroneStudio.Modules.Connection
         private readonly ConnectionManager connectionManager;
         private readonly SerialConnectionFactory serialPortConnectionFactory;
         private readonly MessageBoxDisplayer messageBoxDisplayer;
-        private readonly BluetoothConnectionFactory bluetoothConnectionFactory;
         private readonly UiDispatcherProvider uiDispatcherProvider;
     }
 }

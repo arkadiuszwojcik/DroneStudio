@@ -6,14 +6,14 @@ namespace DroneStudio.Modules.Settings
 {
     public interface ISettingsModel
     {
-        void SetFloat(EepromFieldAttribute field, float value);
-        float GetFloat(EepromFieldAttribute field);
+        void SetFloat(EepromField field, float value);
+        float GetFloat(EepromField field);
 
-        void SetShort(EepromFieldAttribute field, short value);
-        short GetShort(EepromFieldAttribute field);
+        void SetShort(EepromField field, short value);
+        short GetShort(EepromField field);
 
-        IEnumerable<EepromFieldAttribute> EepromFields { get; }
+        IEnumerable<EepromField> EepromFields { get; }
 
-        event EventHandler Modyfied;
+        event EventHandler EepromModyfied;
     }
 }

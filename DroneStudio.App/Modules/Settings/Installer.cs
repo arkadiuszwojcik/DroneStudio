@@ -5,6 +5,7 @@ using Castle.Facilities.TypedFactory;
 using DroneStudio.Modules.Settings.Commands;
 using DroneStudio.Modules.Settings.Views;
 using DroneStudio.Modules.Settings.ViewModels;
+using DroneStudio.Modules.Settings.Converters;
 
 namespace DroneStudio.Modules.Settings
 {
@@ -12,8 +13,11 @@ namespace DroneStudio.Modules.Settings
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.Register(Component.For<EepromFieldToLoadCommandConverter>().LifestyleTransient());
+            container.Register(Component.For<EepromFieldToSendCommandConverter>().LifestyleTransient());
             container.Register(Component.For<LoadCommand>().LifestyleTransient());
             container.Register(Component.For<SaveCommand>().LifestyleTransient());
+            container.Register(Component.For<SendCommand>().LifestyleTransient());
             container.Register(Component.For<SettingsView>().LifestyleTransient());
             container.Register(Component.For<SettingsViewModel>().LifestyleTransient());
             container.Register(Component.For<ISettingsViewFactory>().AsFactory().LifestyleSingleton());
